@@ -1,0 +1,36 @@
+body {
+  text-align: center;
+}
+
+li {
+  display: flex;
+  justify-content: center;
+  list-style-type: none;
+  padding-top: 10px;
+}
+
+ul {
+  text-align: center;
+}
+
+.textBox {
+  width: 300px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.done {
+  text-decoration: line-through;
+  background: green;
+}
+
+.doneBtn {
+  font-weight: bold;
+}
+
+.content {
+  border: 1px solid black;
+  width: 500px;
+  text-align: center;
+}
