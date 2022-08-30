@@ -137,9 +137,9 @@ class Storage {
 class Task {
   constructor(eventStorages) {
     this.eventStorage = eventStorages;
-    this.eventStorage.subscribe("done",this.done);
-    this.eventStorage.subscribe("edit", this.edit);
-    this.eventStorage.subscribe("delete", this.delete);
+    this.eventStorage.subscribe("done",(...args)=>this.done.call(this,...args));
+    this.eventStorage.subscribe("edit",(...args)=>this.edit.call(this,...args));
+    this.eventStorage.subscribe("delete", (...args)=>this.delete.call(this,...args));
   }
   addNewPost(storage) {
     let content = document.querySelector(".textBox");
@@ -245,16 +245,16 @@ class Task {
     ul.addEventListener("click", (e) => {
       const id =+ e.target.parentNode.getAttribute("id");
       if (e.target.classList.contains("doneBtn")) {
-        this.done(storage, id);
+        this.eventStorage.emit("done",[storage,id]);
       }
       if (
         e.target.classList.contains("changeBtn") &&
         !e.target.previousSibling.classList.contains("done")
       ) {
-        this.edit(storage,e, id);
+        this.eventStorage.emit("edit",[storage,e,id]);
       }
       if (e.target.classList.contains("deconsteBtn")) {
-        this.delete(storage, id);
+        this.eventStorage.emit("delete",[storage,id]);
       }
       storage.log();
     });
